@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FOMO Firewall</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">SoSoValue Buildathon Demo</p>
+          <h1 data-i18n="title">FOMO Firewall</h1>
+        </div>
+        <div class="lang-switch" aria-label="Language switch">
+          <button class="lang-btn active" data-lang="en" type="button">EN</button>
+          <button class="lang-btn" data-lang="zh" type="button">中文</button>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <section class="panel input-panel">
+          <div class="panel-head">
+            <p class="eyebrow" data-i18n="inputEyebrow">Pre-trade cooling check</p>
+            <h2 data-i18n="inputTitle">Search any coin. FOMO Firewall updates automatically.</h2>
+          </div>
+
+          <label for="tradeThought" data-i18n="promptLabel">Search coin or ticker</label>
+          <div class="search-box">
+            <input id="tradeThought" class="search-input" autocomplete="off" placeholder="BTC, SOL, PEPE..." />
+            <div id="assetSuggestions" class="asset-suggestions" hidden></div>
+          </div>
+
+          <label>
+            <span data-i18n="profileLabel">User profile</span>
+            <select id="profile">
+              <option value="beginner" data-i18n="beginner">Beginner</option>
+              <option value="curious" data-i18n="curious">Crypto curious</option>
+              <option value="active" data-i18n="active">Active trader</option>
+            </select>
+          </label>
+
+          <section class="plan-gate">
+            <div class="section-mini-head">
+              <p class="eyebrow" data-i18n="planGateEyebrow">Execution gate</p>
+              <strong id="planGateStatus">Plan missing</strong>
+            </div>
+            <div class="plan-grid">
+              <label><span data-i18n="amountLabel">Amount</span><input id="plannedAmount" type="number" min="0" step="1" placeholder="100" /></label>
+              <label><span data-i18n="horizonLabel">Holding time</span><select id="timeHorizon"><option value="" data-i18n="horizonEmpty">Select</option><option value="intraday" data-i18n="horizonIntraday">Intraday</option><option value="swing" data-i18n="horizonSwing">Swing</option><option value="long" data-i18n="horizonLong">Long term</option></select></label>
+              <label><span data-i18n="stopLossLabel">Stop loss</span><input id="stopLossInput" type="number" step="0.1" placeholder="168.0" /></label>
+              <label><span data-i18n="takeProfitLabel">Take profit</span><input id="takeProfitInput" type="number" step="0.1" placeholder="190.0" /></label>
+            </div>
+          </section>
+
+          <section class="receipt-builder">
+            <div class="receipt-form">
+              <p class="eyebrow" data-i18n="receiptBuilderEyebrow">Pre-trade receipt</p>
+              <h3 data-i18n="receiptBuilderTitle">Make the impulse explicit</h3>
+              <label><span data-i18n="whyLabel">Why do you want this trade?</span><input id="whyInput" /></label>
+              <label><span data-i18n="invalidLabel">What would prove you wrong?</span><input id="invalidInput" /></label>
+              <button id="saveReceiptBtn" class="secondary" type="button" data-i18n="saveReceipt">Save receipt</button>
+            </div>
+            <div class="receipt-history">
+              <div class="history-head">
+                <div><p class="eyebrow" data-i18n="historyEyebrow">Review log</p><span id="historyCount" class="history-count">0 records</span></div>
+                <button id="viewHistoryBtn" class="text-button" type="button" data-i18n="viewHistory">View all</button>
+              </div>
+              <div id="profileStats" class="profile-stats"></div>
+              <div id="receiptHistory" class="history-list"></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="panel report-panel">
+          <div class="report-head">
+            <div>
+              <p class="eyebrow" data-i18n="reportEyebrow">Cooling report</p>
+              <h2 id="reportTitle" data-i18n="reportTitle">Check the evidence before acting.</h2>
+              <p class="source-line"><span data-i18n="sourceLabel">Data source</span><strong id="dataSource">--</strong></p>
+            </div>
+            <div class="score-ring"><span id="score">--</span><small data-i18n="scoreLabel">FOMO</small></div>
+          </div>
+
+          <section class="data-status">
+            <div><span data-i18n="modeLabel">Mode</span><strong id="dataMode">Pending</strong></div>
+            <div><span data-i18n="updatedLabel">Updated</span><strong id="dataUpdated">--</strong></div>
+            <p id="riskNote" data-i18n="riskNote">This is a cooling and research assistant, not financial advice.</p>
+          </section>
+
+          <section class="market-strip">
+            <div class="market-main"><span data-i18n="priceLabel">Current price</span><strong id="currentPrice">--</strong></div>
+            <div class="change-grid"><div><span data-i18n="change24hLabel">24h change</span><strong id="change24h">--</strong></div><div><span data-i18n="volumeLabel">24h volume</span><strong id="volume24h">--</strong></div><div><span data-i18n="marketCapLabel">Market cap</span><strong id="marketCap">--</strong></div></div>
+          </section>
+
+          <section class="trend-panel"><div><p class="eyebrow" data-i18n="trendEyebrow">14D K-line</p><strong id="trendMeta">--</strong></div><svg id="trendChart" viewBox="0 0 320 86" role="img"></svg></section>
+
+          <div class="status-strip"><div><span data-i18n="detectedAssetLabel">Detected asset</span><strong id="detectedAsset">--</strong></div><div><span data-i18n="riskLabel">Risk level</span><strong id="riskLevel">--</strong></div><div><span data-i18n="triggerLabel">Main trigger</span><strong id="trigger">--</strong></div><div><span data-i18n="cooldownLabel">Cooldown</span><strong id="cooldown">--</strong></div></div>
+
+          <section class="execution-summary"><div><p class="eyebrow" data-i18n="finalDecisionEyebrow">Action decision</p><h3 id="actionVerdict">--</h3><p id="actionMode">--</p></div><ul id="actionChecklist" class="action-checklist"></ul></section>
+
+          <section class="insight-grid"><article class="insight-card"><h3 data-i18n="fomoTypeTitle">FOMO triggers</h3><div id="fomoTypes" class="pill-row"></div></article><article class="insight-card"><h3 data-i18n="recommendationTitle">Next step</h3><strong id="recommendation" class="recommendation">--</strong><ul id="decisionReasons" class="decision-reasons"></ul></article><article class="insight-card"><h3 data-i18n="breakdownTitle">Score breakdown</h3><div id="scoreBreakdown" class="breakdown-list"></div></article></section>
+
+          <div class="cards"><article class="card evidence"><h3 data-i18n="evidenceTitle">Market evidence</h3><ul id="evidenceList"></ul></article><article class="card counter"><h3 data-i18n="counterTitle">Counter evidence</h3><ul id="counterList"></ul></article><article class="card action"><h3 data-i18n="actionTitle">Cooling action</h3><ul id="actionList"></ul></article></div>
+
+          <section class="api-evidence"><p class="eyebrow" data-i18n="apiEvidenceEyebrow">Powered by SoSoValue</p><div id="apiEvidence" class="api-evidence-grid"></div></section>
+        </section>
+      </section>
+
+      <section id="historyModal" class="history-modal" hidden><div class="history-modal-panel"><div class="history-modal-head"><div><p class="eyebrow" data-i18n="historyEyebrow">Review log</p><h2 data-i18n="fullHistoryTitle">Full history</h2></div><button id="closeHistoryBtn" class="text-button" type="button" data-i18n="closeHistory">Close</button></div><div id="fullHistoryList" class="full-history-list"></div><button id="clearHistoryBtn" class="secondary danger" type="button" data-i18n="clearHistory">Clear history</button></div></section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
